@@ -1,9 +1,9 @@
 //A temporary effect that does not DO anything except look pretty.
 /obj/effect/temporary
-	anchored = TRUE
+	anchored = 1
 	unacidable = TRUE
 	mouse_opacity = 0
-	density = FALSE
+	density = 0
 	layer = ABOVE_HUMAN_LAYER
 
 /obj/effect/temporary/Initialize(var/mapload, var/duration = 30, var/_icon = 'icons/effects/effects.dmi', var/_state)

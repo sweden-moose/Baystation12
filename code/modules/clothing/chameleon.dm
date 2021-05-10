@@ -47,7 +47,7 @@
 	. = ..()
 	set_extension(src,/datum/extension/chameleon/clothing)
 
-/obj/item/storage/backpack/chameleon
+/obj/item/weapon/storage/backpack/chameleon
 	name = "backpack"
 	icon_state = "backpack"
 	item_state = "backpack"
@@ -55,9 +55,9 @@
 	origin_tech = list(TECH_ESOTERIC = 3)
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 
-/obj/item/storage/backpack/chameleon/Initialize()
+/obj/item/weapon/storage/backpack/chameleon/Initialize()
 	. = ..()
-	set_extension(src,/datum/extension/chameleon/backpack,/obj/item/storage/backpack)
+	set_extension(src,/datum/extension/chameleon/backpack,/obj/item/weapon/storage/backpack)
 
 /obj/item/clothing/gloves/chameleon
 	name = "gloves"
@@ -119,7 +119,7 @@
 	. = ..()
 	set_extension(src,/datum/extension/chameleon/clothing/accessory)
 
-/obj/item/gun/energy/chameleon
+/obj/item/weapon/gun/energy/chameleon
 	name = "chameleon gun"
 	desc = "A hologram projector in the shape of a gun. There is a dial on the side to change the gun's disguise."
 	icon = 'icons/obj/guns/revolvers.dmi'
@@ -135,6 +135,6 @@
 	charge_cost = 20 //uses next to no power, since it's just holograms
 	max_shots = 50
 
-/obj/item/gun/energy/chameleon/Initialize()
+/obj/item/weapon/gun/energy/chameleon/Initialize()
 	. = ..()
 	set_extension(src,/datum/extension/chameleon/gun)

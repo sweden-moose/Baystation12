@@ -1,4 +1,4 @@
-/obj/item/rig/vox
+/obj/item/weapon/rig/vox
 	name = "alien rig control module"
 	desc = "A strange rig. Parts of it writhe and squirm as if alive. The visor looks more like a thick membrane."
 	suit_type = "alien rig"
@@ -19,9 +19,9 @@
 	helm_type = /obj/item/clothing/head/helmet/space/rig/vox_rig
 	boot_type = /obj/item/clothing/shoes/magboots/rig/vox_rig
 	glove_type = /obj/item/clothing/gloves/rig/vox_rig
-	air_type =     /obj/item/tank/nitrogen
+	air_type =     /obj/item/weapon/tank/nitrogen
 	
-	allowed = list(/obj/item/device/flashlight, /obj/item/tank, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/ammo_magazine/shotholder, /obj/item/handcuffs, /obj/item/device/radio, /obj/item/melee/baton, /obj/item/gun, /obj/item/pickaxe)
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/ammo_magazine/shotholder, /obj/item/weapon/handcuffs, /obj/item/device/radio, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, /obj/item/weapon/pickaxe)
 	
 	online_slowdown = 1
 

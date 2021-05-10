@@ -384,7 +384,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 			continue
 		if(jobban_isbanned(O, "pAI"))
 			continue
-		if(list_find(asked, O.key))
+		if(asked.Find(O.key))
 			if(world.time < asked[O.key] + askDelay)
 				continue
 			else

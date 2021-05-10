@@ -72,7 +72,7 @@
 	dat += "</td>"
 	if(append)
 		dat += "<td width = '100px'>[append]</td>"
-	dat += "</tr></table>"
+	dat += "</tr></table><hr>"
 	return jointext(dat, null)
 #undef COLLAPSED_CULTURE_BLURB_LEN
 

@@ -5,17 +5,13 @@
 	icon_state = "operating"
 	var/icon_state_unpowered = "telescreen"
 	anchored = TRUE
-	density = FALSE
+	density = 0
 	idle_power_usage = 75
 	active_power_usage = 300
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 	w_class = ITEM_SIZE_HUGE
-	
-	machine_name = "body scanner display"
-	machine_desc = "Receives body scans from a linked body scanner and allows them to be viewed remotely."
-	
 	var/list/bodyscans = list()
 	var/selected = 0
 

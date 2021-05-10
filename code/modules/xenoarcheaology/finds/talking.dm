@@ -60,7 +60,7 @@
 		spawn(2)
 			SaySomething(pick(seperate))
 
-/*/obj/item/talkingcrystal/proc/debug()
+/*/obj/item/weapon/talkingcrystal/proc/debug()
 	//set src in view()
 	for(var/v in heard_words)
 		log_debug("[uppertext(v)]")
@@ -94,7 +94,7 @@
 	text=lowertext(text)
 	for(var/ya,ya <= limit,ya++)
 
-		if(list_find(heard_words, "[text]"))
+		if(heard_words.Find("[text]"))
 			var/list/w = heard_words["[text]"]
 			text=pick(w)
 		else

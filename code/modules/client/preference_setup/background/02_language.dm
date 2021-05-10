@@ -1,3 +1,5 @@
+#define MAX_LANGUAGES 3
+
 /datum/preferences
 	var/list/alternate_languages
 
@@ -115,3 +117,5 @@
 	if(pref.alternate_languages.len < MAX_LANGUAGES)
 		var/remaining_langs = MAX_LANGUAGES - pref.alternate_languages.len
 		LAZYADD(., "- <a href='?src=\ref[src];add_language=1'>add</a> ([remaining_langs] remaining)<br>")
+
+#undef MAX_LANGUAGES

@@ -7,7 +7,11 @@
 	icon_dead = "basic"
 	health = 55
 	maxHealth = 55
-	natural_weapon = /obj/item/natural_weapon/drone_slicer
+	melee_damage_lower = 2
+	melee_damage_upper = 3
+	melee_damage_flags = DAM_SHARP|DAM_EDGE
+	attacktext = "clawed"
+	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	projectiletype = /obj/item/projectile/beam/smalllaser
 	faction = "hivebot"
 	min_gas = null
@@ -65,7 +69,7 @@ Teleporter beacon, and its subtypes
 	health = 200
 	maxHealth = 200
 	status_flags = 0
-	anchored = TRUE
+	anchored = 1
 	stop_automated_movement = 1
 
 	var/bot_type = /mob/living/simple_animal/hostile/hivebot
@@ -133,7 +137,10 @@ The megabot
 	icon_dead = "megabot_dead"
 	health = 440
 	maxHealth = 440
-	natural_weapon = /obj/item/natural_weapon/circular_saw
+	melee_damage_lower = 15
+	melee_damage_upper = 19
+	melee_damage_flags = DAM_SHARP|DAM_EDGE
+	attacktext = "sawed"
 	speed = 0
 	natural_armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
@@ -149,13 +156,6 @@ The megabot
 	var/attack_mode = ATTACK_MODE_MELEE
 	var/num_shots
 	var/deactivated
-
-/obj/item/natural_weapon/circular_saw
-	name = "giant circular saw"
-	attack_verb = list("sawed", "ripped")
-	force = 15
-	sharp = TRUE
-	edge = TRUE
 
 /mob/living/simple_animal/hostile/hivebot/mega/Initialize()
 	. = ..()

@@ -21,7 +21,7 @@
 	icon_state = "tiny"
 	icon_keyboard = "tiny_keyboard"
 	icon_screen = "lift"
-	density = FALSE
+	density = 0
 
 /obj/machinery/computer/shuttle_control/lift/robotics
 	name = "robotics lift controls"
@@ -30,7 +30,7 @@
 	icon_state = "tiny"
 	icon_keyboard = "tiny_keyboard"
 	icon_screen = "lift"
-	density = FALSE
+	density = 0
 
 /obj/machinery/computer/shuttle_control/lift/medical
 	name = "medical lift controls"
@@ -39,7 +39,7 @@
 	icon_state = "tiny"
 	icon_keyboard = "tiny_keyboard"
 	icon_screen = "lift"
-	density = FALSE
+	density = 0
 
 /datum/shuttle/autodock/ferry/cargo_lift
 	name = "Primary Cargo Lift"

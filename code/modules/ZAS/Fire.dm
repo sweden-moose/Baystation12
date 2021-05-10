@@ -116,7 +116,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /obj/fire
 	//Icon for fire on turfs.
 
-	anchored = TRUE
+	anchored = 1
 	mouse_opacity = 0
 
 	blend_mode = BLEND_ADD

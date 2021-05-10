@@ -3,8 +3,8 @@
 	desc = "Studies the emissions of anomalous materials to discover their uses."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "xenoarch_console"
-	anchored = TRUE
-	density = TRUE
+	anchored = 1
+	density = 1
 	var/scan_in_progress = 0
 	var/scan_num = 0
 	var/obj/scanned_obj
@@ -48,10 +48,8 @@
 
 	dat += "<br>"
 	dat += "<hr>"
-	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
-	var/datum/browser/popup = new(user, "artanalyser", "Artifact Analyzer", 450, 500)
-	popup.set_content(dat)
-	popup.open()
+	dat += "<a href='?src=\ref[src]'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
+	show_browser(user, dat, "window=artanalyser;size=450x500")
 	user.set_machine(src)
 	onclose(user, "artanalyser")
 
@@ -71,17 +69,17 @@
 			results = get_scan_info(scanned_object)
 
 		src.visible_message("<b>[name]</b> states, \"Scanning complete.\"")
-		var/obj/item/paper/P = new(src.loc)
+		var/obj/item/weapon/paper/P = new(src.loc)
 		P.SetName("[src] report #[++report_num]")
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
 		P.info += "<br>"
 		P.info += "\icon[scanned_object] [results]"
-		P.stamped = list(/obj/item/stamp)
+		P.stamped = list(/obj/item/weapon/stamp)
 		P.queue_icon_update()
 
 		if(scanned_object && istype(scanned_object, /obj/machinery/artifact))
 			var/obj/machinery/artifact/A = scanned_object
-			A.anchored = FALSE
+			A.anchored = 0
 			A.being_used = 0
 			scanned_object = null
 
@@ -101,7 +99,7 @@
 					if(A.being_used)
 						artifact_in_use = 1
 					else
-						A.anchored = TRUE
+						A.anchored = 1
 						A.being_used = 1
 
 				if(artifact_in_use)
@@ -151,7 +149,7 @@
 			if(A.my_effect)
 				out += A.my_effect.getDescription()
 
-			if(A.secondary_effect)
+			if(A.secondary_effect && A.secondary_effect.activated)
 				out += "<br><br>Internal scans indicate ongoing secondary activity operating independently from primary systems.<br><br>"
 				out += A.secondary_effect.getDescription()
 

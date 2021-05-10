@@ -17,4 +17,3 @@
 	activation_cost_resource = /datum/chorus_resource/growth_meat
 	activation_cost_amount = 100
 	health = 200
-	death_message = "ruptures and splits, spilling forth lumps of flesh and thick amniotic fluid."

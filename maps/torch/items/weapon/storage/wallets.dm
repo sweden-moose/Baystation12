@@ -1,4 +1,4 @@
-/obj/item/storage/wallet/Initialize()
+/obj/item/weapon/storage/wallet/Initialize()
 	. = ..()
 	can_hold |= list(
 		/obj/item/clothing/accessory/solgov,

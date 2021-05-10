@@ -3,7 +3,7 @@
 	name = "automatic floor layer"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	density = TRUE
+	density = 1
 	var/turf/old_turf
 	var/on = 0
 	var/obj/item/stack/tile/T

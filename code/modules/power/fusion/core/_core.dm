@@ -7,11 +7,11 @@
 	icon = 'icons/obj/machines/power/fusion_core.dmi'
 	icon_state = "core0"
 	layer = ABOVE_HUMAN_LAYER
-	density = TRUE
+	density = 1
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 50
 	active_power_usage = 500 //multiplied by field strength
-	anchored = FALSE
+	anchored = 0
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
@@ -22,7 +22,7 @@
 	var/initial_id_tag
 
 /obj/machinery/power/fusion_core/mapped
-	anchored = TRUE
+	anchored = 1
 
 /obj/machinery/power/fusion_core/Initialize()
 	. = ..()

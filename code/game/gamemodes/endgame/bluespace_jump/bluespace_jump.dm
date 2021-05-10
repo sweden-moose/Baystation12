@@ -73,9 +73,9 @@
 	name = "bluespace echo"
 	desc = "It's not going to punch you, is it?"
 	var/mob/living/carbon/human/daddy
-	anchored = TRUE
+	anchored = 1
 	var/reality = 0
-	simulated = FALSE
+	simulated = 0
 
 /obj/effect/bluegoast/New(nloc, ndaddy)
 	..(nloc)

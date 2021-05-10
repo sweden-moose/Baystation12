@@ -7,8 +7,8 @@
 	name = "window grille spawner"
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "wingrille"
-	density = TRUE
-	anchored = TRUE
+	density = 1
+	anchored = 1.0
 	var/win_path = /obj/structure/window/basic
 	var/activated = FALSE
 	var/fulltile = FALSE

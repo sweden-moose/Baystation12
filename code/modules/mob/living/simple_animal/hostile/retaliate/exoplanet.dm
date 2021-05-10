@@ -39,9 +39,9 @@
 				else
 					qdel(S)
 
-/mob/living/simple_animal/proc/name_species(newname as text)
+/mob/living/simple_animal/proc/name_species()
 	set name = "Name Alien Species"
-	set category = "IC"
+	set category = "Exploration"
 	set src in view()
 
 	if(!GLOB.using_map.use_overmap)
@@ -51,6 +51,7 @@
 
 	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
 		if(src in E.animals)
+			var/newname = input("What do you want to name this species?", "Species naming", E.get_random_species_name()) as text|null
 			newname = sanitizeName(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
 			if(newname && CanInteract(usr, GLOB.conscious_state))
 				if(E.rename_species(type, newname))
@@ -70,7 +71,10 @@
 	maxHealth = 125
 	health = 125
 	speed = 2
-	natural_weapon = /obj/item/natural_weapon/claws
+	melee_damage_lower = 5
+	melee_damage_upper = 15
+	melee_damage_flags = DAM_SHARP
+	attacktext = "mauled"
 	cold_damage_per_tick = 0
 	speak_chance = 5
 	speak = list("Hruuugh!","Hrunnph")
@@ -97,7 +101,10 @@
 	maxHealth = 25
 	health = 25
 	speed = 1
-	natural_weapon = /obj/item/natural_weapon/claws/weak
+	melee_damage_lower = 1
+	melee_damage_upper = 8
+	melee_damage_flags = DAM_SHARP
+	attacktext = "gouged"
 	cold_damage_per_tick = 0
 	speak_chance = 5
 	speak = list("Awrr?","Aowrl!","Worrl")
@@ -116,7 +123,10 @@
 	maxHealth = 75
 	health = 75
 	speed = 1
-	natural_weapon = /obj/item/natural_weapon/claws
+	melee_damage_lower = 3
+	melee_damage_upper = 12
+	melee_damage_flags = DAM_SHARP
+	attacktext = "gouged"
 	cold_damage_per_tick = 0
 	speak_chance = 2
 	speak = list("Shuhn","Shrunnph?","Shunpf")
@@ -136,7 +146,7 @@
 	icon_living = "yithian"
 	icon_dead = "yithian_dead"
 	mob_size = MOB_TINY
-	density = FALSE
+	density = 0
 
 /mob/living/simple_animal/tindalos
 	name = "tindalos"
@@ -145,7 +155,7 @@
 	icon_living = "tindalos"
 	icon_dead = "tindalos_dead"
 	mob_size = MOB_TINY
-	density = FALSE
+	density = 0
 
 /mob/living/simple_animal/thinbug
 	name = "taki"
@@ -156,7 +166,7 @@
 	speak_chance = 1
 	emote_hear = list("scratches the ground","chitters")
 	mob_size = MOB_MINISCULE
-	density = FALSE
+	density = 0
 
 /mob/living/simple_animal/hostile/retaliate/royalcrab
 	name = "cragenoy"
@@ -169,13 +179,15 @@
 	maxHealth = 150
 	health = 150
 	speed = 1
-	natural_weapon = /obj/item/natural_weapon/pincers
+	melee_damage_lower = 2
+	melee_damage_upper = 5
+	attacktext = "pinched"
 	speak_chance = 1
 	emote_see = list("skitters","oozes liquid from its mouth", "scratches at the ground", "clicks its claws")
 	natural_armor = list(
 		melee = ARMOR_MELEE_RESISTANT
 		)
-
+	
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby
 	name = "charbaby"
 	desc = "A huge grubby creature."
@@ -183,13 +195,16 @@
 	icon_living = "char"
 	icon_dead = "char_dead"
 	mob_size = MOB_LARGE
+	damtype = BURN
 	health = 45
 	maxHealth = 45
-	natural_weapon = /obj/item/natural_weapon/charbaby
+	melee_damage_lower = 2
+	melee_damage_upper = 3
 	speed = 2
 	response_help =  "pats briefly"
 	response_disarm = "gently pushes"
 	response_harm = "strikes"
+	attacktext = "singed"
 	return_damage_min = 2
 	return_damage_max = 3
 	harm_intent_damage = 1
@@ -197,12 +212,6 @@
 	natural_armor = list(
 		laser = ARMOR_LASER_HANDGUNS
 		)
-
-/obj/item/natural_weapon/charbaby
-	name = "scalding hide"
-	damtype = BURN
-	force = 5
-	attack_verb = list("singed")
 
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby/attack_hand(mob/living/carbon/human/H)
 	. = ..()
@@ -221,4 +230,5 @@
 	icon_state = "lavadog"
 	icon_living = "lavadog"
 	icon_dead = "lavadog_dead"
+	attacktext = "bit"
 	speak = list("Karuph","Karump")

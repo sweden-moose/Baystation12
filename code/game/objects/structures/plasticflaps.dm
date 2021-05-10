@@ -3,8 +3,8 @@
 	desc = "Completely impassable - or are they?"
 	icon = 'icons/obj/stationobjs.dmi' //Change this.
 	icon_state = "plasticflaps"
-	density = FALSE
-	anchored = TRUE
+	density = 0
+	anchored = 1
 	layer = ABOVE_HUMAN_LAYER
 	explosion_resistance = 5
 

@@ -2,8 +2,8 @@
 	name = "computer"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "computer"
-	density = TRUE
-	anchored = TRUE
+	density = 1
+	anchored = 1.0
 	idle_power_usage = 300
 	active_power_usage = 300
 	construct_state = /decl/machine_construction/default/panel_closed/computer
@@ -12,8 +12,6 @@
 	frame_type = /obj/machinery/constructable_frame/computerframe/deconstruct
 	var/processing = 0
 
-	var/max_health = 80
-	var/health
 	var/icon_keyboard = "generic_key"
 	var/icon_screen = "generic"
 	var/light_max_bright_on = 0.2
@@ -29,13 +27,11 @@
 
 /obj/machinery/computer/Initialize()
 	. = ..()
-	health = max_health
 	update_icon()
 
 /obj/machinery/computer/emp_act(severity)
+	if(prob(20/severity)) set_broken(TRUE)
 	..()
-	if(prob(20/severity))
-		take_damage(max_health)
 
 /obj/machinery/computer/ex_act(severity)
 	switch(severity)
@@ -49,37 +45,17 @@
 			if (prob(50))
 				for(var/x in verbs)
 					verbs -= x
-				take_damage(max_health)
+				set_broken(TRUE)
 		if(3.0)
 			if (prob(25))
 				for(var/x in verbs)
 					verbs -= x
-				take_damage(max_health)
+				set_broken(TRUE)
 
 /obj/machinery/computer/bullet_act(var/obj/item/projectile/Proj)
-	take_damage(Proj.get_structure_damage())
-	..()
-
-/obj/machinery/computer/attackby(obj/item/I, mob/user)
-	if (isScrewdriver(I) || isWrench(I) || isCrowbar(I))
-		return ..() // handled by construction
-	if (user.a_intent != I_HURT)
-		return ..()
-
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	playsound(src, 'sound/weapons/smash.ogg', 25, 1)
-	take_damage(I.force)
-	..()
-
-/obj/machinery/computer/proc/take_damage(var/damage)
-	if (health <= 0)
-		return
-
-	health -= damage
-	if(health <= 0)
+	if(prob(Proj.get_structure_damage()))
 		set_broken(TRUE)
-		visible_message(SPAN_WARNING("\The [src] breaks!"))
+	..()
 
 /obj/machinery/computer/on_update_icon()
 	overlays.Cut()
@@ -90,8 +66,8 @@
 		set_light(0)
 		icon = 'icons/obj/computer.dmi'
 		icon_state = "wired"
-		var/screen = get_component_of_type(/obj/item/stock_parts/console_screen)
-		var/keyboard = get_component_of_type(/obj/item/stock_parts/keyboard)
+		var/screen = get_component_of_type(/obj/item/weapon/stock_parts/console_screen)
+		var/keyboard = get_component_of_type(/obj/item/weapon/stock_parts/keyboard)
 		if(screen)
 			overlays += "comp_screen"
 		if(keyboard)
@@ -128,9 +104,9 @@
 /obj/machinery/computer/dismantle(mob/user)
 	if(stat & BROKEN)
 		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-		for(var/obj/item/stock_parts/console_screen/screen in component_parts)
+		for(var/obj/item/weapon/stock_parts/console_screen/screen in component_parts)
 			qdel(screen)
-			new /obj/item/material/shard(loc)
+			new /obj/item/weapon/material/shard(loc)
 	else
 		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
 	return ..()

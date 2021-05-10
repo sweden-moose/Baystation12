@@ -14,7 +14,6 @@
 	summon_type = list(/obj/structure/constructshell)
 
 	hud_state = "artificer"
-	cast_sound = 'sound/items/Deconstruct.ogg'
 
 /spell/aoe_turf/conjure/construct/lesser
 	charge_max = 1800
@@ -34,7 +33,6 @@
 	summon_type = list(/turf/simulated/floor/cult)
 
 	hud_state = "const_floor"
-	cast_sound = 'sound/items/Welder.ogg'
 
 /spell/aoe_turf/conjure/wall
 	name = "Lesser Construction"
@@ -48,7 +46,6 @@
 	summon_type = list(/turf/simulated/wall/cult)
 
 	hud_state = "const_wall"
-	cast_sound = 'sound/items/Welder.ogg'
 
 /spell/aoe_turf/conjure/wall/reinforced
 	name = "Greater Construction"
@@ -62,7 +59,6 @@
 	cast_delay = 50
 
 	summon_type = list(/turf/simulated/wall/r_wall)
-	cast_sound = 'sound/items/Welder.ogg'
 
 /spell/aoe_turf/conjure/soulstone
 	name = "Summon Soulstone"
@@ -78,7 +74,6 @@
 
 	hud_state = "const_stone"
 	override_base = "const"
-	cast_sound = 'sound/items/Welder.ogg'
 
 /spell/aoe_turf/conjure/pylon
 	name = "Red Pylon"
@@ -93,7 +88,15 @@
 	summon_type = list(/obj/structure/cult/pylon)
 
 	hud_state = "const_pylon"
-	cast_sound = 'sound/items/Welder.ogg'
+
+/spell/aoe_turf/conjure/pylon/cast(list/targets)
+	..()
+	var/turf/spawn_place = pick(targets)
+	for(var/obj/structure/cult/pylon/P in spawn_place.contents)
+		if(P.isbroken)
+			P.repair(usr)
+		continue
+	return
 
 /spell/aoe_turf/conjure/forcewall/lesser
 	name = "Shield"
@@ -108,12 +111,11 @@
 	duration = 200
 
 	hud_state = "const_juggwall"
-	cast_sound = 'sound/magic/forcewall.ogg'
 
 //Code for the Juggernaut construct's forcefield, that seemed like a good place to put it.
 /obj/effect/forcefield/cult
-	name = "juggernaut shield"
-	desc = "An eerie-looking obstacle that seems to have been pulled from another dimension through sheer force."
+	desc = "That eerie looking obstacle seems to have been pulled from another dimension through sheer force."
+	name = "Juggerwall"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "m_shield_cult"
 	light_color = "#b40000"

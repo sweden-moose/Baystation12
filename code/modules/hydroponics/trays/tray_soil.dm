@@ -2,14 +2,14 @@
 	name = "soil"
 	desc = "A mound of earth. You could plant some seeds here."
 	icon_state = "soil"
-	density = FALSE
+	density = 0
 	use_power = POWER_USE_OFF
 	stat_immune = NOINPUT | NOSCREEN | NOPOWER
 	mechanical = 0
 	tray_light = 0
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O,/obj/item/tank))
+	if(istype(O,/obj/item/weapon/tank))
 		return
 	else
 		..()

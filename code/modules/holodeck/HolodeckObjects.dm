@@ -10,7 +10,7 @@
 /turf/simulated/floor/holofloor/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	return 0.8
 
-/turf/simulated/floor/holofloor/attackby(obj/item/W as obj, mob/user as mob)
+/turf/simulated/floor/holofloor/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
@@ -136,7 +136,7 @@
 	desc = "Apply butt."
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "stool_padded_preview"
-	anchored = TRUE
+	anchored = 1.0
 
 /obj/item/clothing/gloves/boxing/hologlove
 	name = "boxing gloves"
@@ -162,7 +162,11 @@
 		to_chat(user, ("<span class='notice'>It's a holowindow, you can't dismantle it!</span>"))
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
-			hit(W.force, user, W)
+			hit(W.force)
+			if(health <= 7)
+				anchored = 0
+				update_nearby_icons()
+				step(src, get_dir(user, src))
 		else
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()
@@ -181,7 +185,7 @@
 /obj/machinery/door/window/holowindoor/Destroy()
 	..()
 
-/obj/machinery/door/window/holowindoor/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/door/window/holowindoor/attackby(obj/item/weapon/I as obj, mob/user as mob)
 
 	if (src.operating == 1)
 		return
@@ -214,16 +218,16 @@
 /obj/structure/bed/chair/holochair/Destroy()
 	..()
 
-/obj/structure/bed/chair/holochair/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/wrench))
+/obj/structure/bed/chair/holochair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/wrench))
 		to_chat(user, ("<span class='notice'>It's a holochair, you can't dismantle it!</span>"))
 	return
 
-/obj/item/holo
+/obj/item/weapon/holo
 	damtype = PAIN
 	no_attack_log = TRUE
 
-/obj/item/holo/esword
+/obj/item/weapon/holo/esword
 	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "holosword"
 	desc = "May the force be within you. Sorta."
@@ -238,15 +242,15 @@
 	var/active = 0
 	var/item_color
 
-/obj/item/holo/esword/green
+/obj/item/weapon/holo/esword/green
 	New()
 		item_color = "green"
 
-/obj/item/holo/esword/red
+/obj/item/weapon/holo/esword/red
 	New()
 		item_color = "red"
 
-/obj/item/holo/esword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/obj/item/weapon/holo/esword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	. = ..()
 	if(.)
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -254,13 +258,13 @@
 		spark_system.start()
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 
-/obj/item/holo/esword/get_parry_chance(mob/user)
+/obj/item/weapon/holo/esword/get_parry_chance(mob/user)
 	return active ? ..() : 0
 
-/obj/item/holo/esword/New()
+/obj/item/weapon/holo/esword/New()
 	item_color = pick("red","blue","green","purple")
 
-/obj/item/holo/esword/attack_self(mob/living/user as mob)
+/obj/item/weapon/holo/esword/attack_self(mob/living/user as mob)
 	active = !active
 	if (active)
 		force = 30
@@ -282,7 +286,7 @@
 
 //BASKETBALL OBJECTS
 
-/obj/item/beach_ball/holoball
+/obj/item/weapon/beach_ball/holoball
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "basketball"
 	name = "basketball"
@@ -295,8 +299,8 @@
 	desc = "Boom, Shakalaka!"
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "hoop"
-	anchored = TRUE
-	density = TRUE
+	anchored = 1
+	density = 1
 	throwpass = 1
 
 /obj/structure/holohoop/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -313,12 +317,12 @@
 	else
 		return ..(mover, target, height, air_group)
 
-//VOLLEYBALL OBJECTS
+//VOLEYBALL OBJECTS
 
-/obj/item/beach_ball/holovolleyball
+/obj/item/weapon/beach_ball/holovolleyball
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "volleyball"
-	name = "volleyball"
+	name = "voleyball"
 	item_state = "volleyball"
 	desc = "You can be my wingman anytime."
 	w_class = ITEM_SIZE_LARGE //Stops people from hiding it in their pockets
@@ -328,8 +332,8 @@
 	desc = "Bullshit, you can be mine!"
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "volleynet_mid"
-	density = TRUE
-	anchored = TRUE
+	density = 1
+	anchored = 1
 	layer = TABLE_LAYER
 	throwpass = 1
 	dir = 4
@@ -360,7 +364,7 @@
 	var/area/currentarea = null
 	var/eventstarted = 0
 
-	anchored = TRUE
+	anchored = 1.0
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON
@@ -373,7 +377,7 @@
 	..()
 
 
-/obj/machinery/readybutton/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/readybutton/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	to_chat(user, "The device is a solid button, there's nothing you can do with it!")
 
 /obj/machinery/readybutton/physical_attack_hand(mob/user)
@@ -440,17 +444,16 @@
 	set_light(0.5, 0.1, 2) //hologram lighting
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
-	var/obj/item/NW = get_natural_weapon()
 	if (safe)
 		faction = MOB_FACTION_NEUTRAL
-		if(NW)
-			NW.force = 0
+		melee_damage_lower = 0
+		melee_damage_upper = 0
 		environment_smash = 0
 		destroy_surroundings = 0
 	else
 		faction = "carp"
-		if(NW)
-			NW.force = initial(NW.force)
+		melee_damage_lower = initial(melee_damage_lower)
+		melee_damage_upper = initial(melee_damage_upper)
 		environment_smash = initial(environment_smash)
 		destroy_surroundings = initial(destroy_surroundings)
 

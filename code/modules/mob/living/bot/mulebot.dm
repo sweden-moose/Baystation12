@@ -13,8 +13,8 @@
 	icon = 'icons/mob/bot/mulebot.dmi'
 	icon_state = "mulebot0"
 	layer = MOB_LAYER
-	anchored = TRUE
-	density = TRUE
+	anchored = 1
+	density = 1
 	health = 150
 	maxHealth = 150
 	mob_bump_flag = HEAVY

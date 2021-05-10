@@ -319,6 +319,8 @@
 			return global.chemical_reaction_logs;
 		if("chicken_count")
 			return global.chicken_count;
+		if("church_name")
+			return global.church_name;
 		if("client_preference_stats_")
 			return global.client_preference_stats_;
 		if("client_repository")
@@ -329,6 +331,8 @@
 			return global.comm_message_listeners;
 		if("command_announcement")
 			return global.command_announcement;
+		if("command_name")
+			return global.command_name;
 		if("common_tools")
 			return global.common_tools;
 		if("config")
@@ -361,8 +365,12 @@
 			return global.default_material_composition;
 		if("default_mobloc")
 			return global.default_mobloc;
+		if("default_onmob_icons")
+			return global.default_onmob_icons;
 		if("default_pai_software")
 			return global.default_pai_software;
+		if("defer_powernet_rebuild")
+			return global.defer_powernet_rebuild;
 		if("delta_index")
 			return global.delta_index;
 		if("department_accounts")
@@ -377,6 +385,8 @@
 			return global.dna_genes;
 		if("doppler_arrays")
 			return global.doppler_arrays;
+		if("dreams")
+			return global.dreams;
 		if("dummy_lighting_corner")
 			return global.dummy_lighting_corner;
 		if("empty_playable_ai_cores")
@@ -463,6 +473,8 @@
 			return global.hivemind_bank;
 		if("holder_mob_icon_cache")
 			return global.holder_mob_icon_cache;
+		if("host")
+			return global.host;
 		if("human_icon_cache")
 			return global.human_icon_cache;
 		if("id_card_states")
@@ -685,6 +697,10 @@
 			return global.random_useful_;
 		if("recentmessages")
 			return global.recentmessages;
+		if("registered_macros_by_ckey_")
+			return global.registered_macros_by_ckey_;
+		if("religion_name")
+			return global.religion_name;
 		if("req_console_assistance")
 			return global.req_console_assistance;
 		if("req_console_information")
@@ -693,6 +709,8 @@
 			return global.req_console_supplies;
 		if("responsive_carriers")
 			return global.responsive_carriers;
+		if("restricted_camera_networks")
+			return global.restricted_camera_networks;
 		if("revdata")
 			return global.revdata;
 		if("robot_custom_icons")
@@ -863,6 +881,10 @@
 			return global.whitelist;
 		if("wireColours")
 			return global.wireColours;
+		if("world_topic_spam_protect_ip")
+			return global.world_topic_spam_protect_ip;
+		if("world_topic_spam_protect_time")
+			return global.world_topic_spam_protect_time;
 		if("world_uplinks")
 			return global.world_uplinks;
 		if("worths")
@@ -1194,6 +1216,8 @@
 			global.chemical_reaction_logs=newval;
 		if("chicken_count")
 			global.chicken_count=newval;
+		if("church_name")
+			global.church_name=newval;
 		if("client_preference_stats_")
 			global.client_preference_stats_=newval;
 		if("client_repository")
@@ -1204,6 +1228,8 @@
 			global.comm_message_listeners=newval;
 		if("command_announcement")
 			global.command_announcement=newval;
+		if("command_name")
+			global.command_name=newval;
 		if("common_tools")
 			global.common_tools=newval;
 		if("config")
@@ -1236,8 +1262,12 @@
 			global.default_material_composition=newval;
 		if("default_mobloc")
 			global.default_mobloc=newval;
+		if("default_onmob_icons")
+			global.default_onmob_icons=newval;
 		if("default_pai_software")
 			global.default_pai_software=newval;
+		if("defer_powernet_rebuild")
+			global.defer_powernet_rebuild=newval;
 		if("delta_index")
 			global.delta_index=newval;
 		if("department_accounts")
@@ -1252,6 +1282,8 @@
 			global.dna_genes=newval;
 		if("doppler_arrays")
 			global.doppler_arrays=newval;
+		if("dreams")
+			global.dreams=newval;
 		if("dummy_lighting_corner")
 			global.dummy_lighting_corner=newval;
 		if("empty_playable_ai_cores")
@@ -1338,6 +1370,8 @@
 			global.hivemind_bank=newval;
 		if("holder_mob_icon_cache")
 			global.holder_mob_icon_cache=newval;
+		if("host")
+			global.host=newval;
 		if("human_icon_cache")
 			global.human_icon_cache=newval;
 		if("id_card_states")
@@ -1560,6 +1594,10 @@
 			global.random_useful_=newval;
 		if("recentmessages")
 			global.recentmessages=newval;
+		if("registered_macros_by_ckey_")
+			global.registered_macros_by_ckey_=newval;
+		if("religion_name")
+			global.religion_name=newval;
 		if("req_console_assistance")
 			global.req_console_assistance=newval;
 		if("req_console_information")
@@ -1568,6 +1606,8 @@
 			global.req_console_supplies=newval;
 		if("responsive_carriers")
 			global.responsive_carriers=newval;
+		if("restricted_camera_networks")
+			global.restricted_camera_networks=newval;
 		if("revdata")
 			global.revdata=newval;
 		if("robot_custom_icons")
@@ -1738,6 +1778,10 @@
 			global.whitelist=newval;
 		if("wireColours")
 			global.wireColours=newval;
+		if("world_topic_spam_protect_ip")
+			global.world_topic_spam_protect_ip=newval;
+		if("world_topic_spam_protect_time")
+			global.world_topic_spam_protect_time=newval;
 		if("world_uplinks")
 			global.world_uplinks=newval;
 		if("worths")
@@ -1909,11 +1953,13 @@
 	"chargen_robolimbs",
 	"chemical_reaction_logs",
 	"chicken_count",
+	"church_name",
 	"client_preference_stats_",
 	"client_repository",
 	"combatlog",
 	"comm_message_listeners",
 	"command_announcement",
+	"command_name",
 	"common_tools",
 	"config",
 	"contamination_overlay",
@@ -1930,7 +1976,9 @@
 	"decls_repository",
 	"default_material_composition",
 	"default_mobloc",
+	"default_onmob_icons",
 	"default_pai_software",
+	"defer_powernet_rebuild",
 	"delta_index",
 	"department_accounts",
 	"department_radio_keys",
@@ -1938,6 +1986,7 @@
 	"dna_activity_bounds",
 	"dna_genes",
 	"doppler_arrays",
+	"dreams",
 	"dummy_lighting_corner",
 	"empty_playable_ai_cores",
 	"endgame_exits",
@@ -1981,6 +2030,7 @@
 	"hadevent",
 	"hivemind_bank",
 	"holder_mob_icon_cache",
+	"host",
 	"human_icon_cache",
 	"id_card_states",
 	"image_repository",
@@ -2092,10 +2142,13 @@
 	"random_maps",
 	"random_useful_",
 	"recentmessages",
+	"registered_macros_by_ckey_",
+	"religion_name",
 	"req_console_assistance",
 	"req_console_information",
 	"req_console_supplies",
 	"responsive_carriers",
+	"restricted_camera_networks",
 	"revdata",
 	"robot_custom_icons",
 	"robot_hud_colours",
@@ -2181,6 +2234,8 @@
 	"weighted_randomevent_locations",
 	"whitelist",
 	"wireColours",
+	"world_topic_spam_protect_ip",
+	"world_topic_spam_protect_time",
 	"world_uplinks",
 	"worths",
 	"wrapped_species_by_ref",

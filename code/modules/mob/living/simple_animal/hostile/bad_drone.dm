@@ -8,7 +8,9 @@
 	speak_chance = 1
 	health = 50
 	maxHealth = 50
-	natural_weapon = /obj/item/natural_weapon/drone_slicer
+	melee_damage_lower = 5
+	melee_damage_upper = 8
+	attacktext = "sliced"
 	faction = "silicon"
 	min_gas = null
 	max_gas = null
@@ -30,7 +32,7 @@
 			var/mob/living/carbon/human/H = A
 			if(H.isSynthetic())
 				return FALSE
-			if(istype(H.head, /obj/item/holder/drone))
+			if(istype(H.head, /obj/item/weapon/holder/drone))
 				return FALSE
 			if(istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg))
 				return FALSE

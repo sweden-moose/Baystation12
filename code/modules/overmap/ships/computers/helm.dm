@@ -7,8 +7,6 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	light_color = "#7faaff"
 	core_skill = SKILL_PILOT
 	silicon_restriction = STATUS_UPDATE
-	machine_name = "helm control console"
-	machine_desc = "A navigation system used to control spacecraft big and small, allowing for configuration of heading and autopilot as well as providing navigational data."
 	var/autopilot = 0
 	var/list/known_sectors = list()
 	var/dx		//desitnation
@@ -225,8 +223,6 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	icon_keyboard = "generic_key"
 	icon_screen = "helm"
 	silicon_restriction = STATUS_UPDATE
-	machine_name = "navigation console"
-	machine_desc = "Used to view a sensor-assisted readout of the current sector and its surrounding areas."
 
 /obj/machinery/computer/ship/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
@@ -276,9 +272,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/navigation/telescreen	//little hacky but it's only used on one ship so it should be okay
 	icon_state = "tele_nav"
-	density = FALSE
-	machine_name = "navigation telescreen"
-	machine_desc = "A compact, slimmed-down version of the navigation console."
+	density = 0
 
 /obj/machinery/computer/ship/navigation/telescreen/on_update_icon()
 	if(reason_broken & MACHINE_BROKEN_NO_PARTS || stat & NOPOWER || stat & BROKEN)

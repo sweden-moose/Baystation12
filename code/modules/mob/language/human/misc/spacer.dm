@@ -18,4 +18,3 @@
 		"ada", "zir", "bian", "ach", "usk", "ado", "ich", "cuan", "iga", "qing", "le", "que", "ki", "qaf", "dei", "eta"
 	)
 	colour = "spacer"
-	has_written_form = TRUE

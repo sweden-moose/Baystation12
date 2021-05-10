@@ -2,12 +2,10 @@
 
 /obj/machinery/computer/operating
 	name = "patient monitoring console"
-	density = TRUE
-	anchored = TRUE
+	density = 1
+	anchored = 1.0
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
-	machine_name = "patient monitoring console"
-	machine_desc = "Displays a realtime health readout of a patient laid onto an adjacent operating table."
 	var/mob/living/carbon/human/victim = null
 	var/obj/machinery/optable/table = null
 

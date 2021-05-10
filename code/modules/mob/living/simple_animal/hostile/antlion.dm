@@ -10,18 +10,20 @@
 	emote_hear = list("clicks its mandibles")
 	emote_see = list("shakes the sand off itself")
 	response_harm   = "strikes"
+	attacktext = "bit"
 	faction = "antlions"
 	bleed_colour = COLOR_SKY_BLUE
 
 	health = 65
 	maxHealth = 65
-	natural_weapon = /obj/item/natural_weapon/bite
+	melee_damage_lower = 7
+	melee_damage_upper = 15
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES
 		)
 	ability_cooldown = 30 SECONDS
 
-	meat_type =     /obj/item/reagent_containers/food/snacks/xenomeat
+	meat_type =     /obj/item/weapon/reagent_containers/food/snacks/xenomeat
 	meat_amount =   5
 	skin_material = MATERIAL_SKIN_CHITIN
 	skin_amount =   15
@@ -88,7 +90,8 @@
 	prep_burrow(FALSE)
 	cooldown_ability(ability_cooldown)
 	for(var/mob/living/carbon/human/H in get_turf(src))
-		H.attackby(natural_weapon, src)
+		var/zone_to_hit = pick(BP_R_FOOT, BP_L_FOOT, BP_R_LEG, BP_L_LEG, BP_GROIN)
+		H.apply_damage(rand(melee_damage_lower, melee_damage_upper), BRUTE, zone_to_hit, DAM_EDGE, used_weapon = "antlion mandible")
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
 		H.Weaken(1)
 	
@@ -112,7 +115,8 @@
 	mob_size = MOB_LARGE
 	health = 275
 	maxHealth = 275
-	natural_weapon = /obj/item/natural_weapon/bite/megalion
+	melee_damage_lower = 21
+	melee_damage_upper = 29
 	natural_armor = list(
 		melee = ARMOR_MELEE_RESISTANT
 		)
@@ -125,10 +129,6 @@
 	skin_material = MATERIAL_SKIN_CHITIN
 	skin_amount =   25
 	bone_amount =   15
-
-/obj/item/natural_weapon/bite/megalion
-	name = "mandibles"
-	force = 25
 
 /mob/living/simple_animal/hostile/antlion/mega/Initialize()
 	. = ..()

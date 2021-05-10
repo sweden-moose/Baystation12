@@ -14,7 +14,7 @@
 	maxHealth = 60
 	available_maneuvers = list(/decl/maneuver/leap)
 	status_flags = NO_ANTAG
-	density = FALSE
+	density = 0
 
 
 	language = LANGUAGE_ROOTLOCAL
@@ -28,7 +28,7 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
-	holder_type = /obj/item/holder/diona
+	holder_type = /obj/item/weapon/holder/diona
 	possession_candidate = 1
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	hud_type = /datum/hud/diona_nymph

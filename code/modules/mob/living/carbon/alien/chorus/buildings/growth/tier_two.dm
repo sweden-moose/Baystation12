@@ -8,13 +8,12 @@
 
 /obj/structure/chorus/gastrointestional_tract
 	name = "gastrointestional tract"
-	desc = "A gross lump of organ meat. The smell is indescribable."
+	desc = "A gross lump of organ meat."
 	icon_state = "growth_stomach"
 	health = 30
 	click_cooldown = 5 SECONDS
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 2
-	death_message = "shears apart in a mess of meat, bile, and rancid fluid."
 
 /obj/structure/chorus/gastrointestional_tract/activate()
 	owner.add_to_resource(/datum/chorus_resource/growth_meat, 1)
@@ -37,8 +36,6 @@
 	click_cooldown = 5 SECONDS
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 2
-	death_message = "cracks loudly and falls to pieces."
-	death_sound = "fracture"
 
 /obj/structure/chorus/ossifier/activate()
 	owner.add_to_resource(/datum/chorus_resource/growth_bones, 1)
@@ -57,7 +54,6 @@
 	desc = "A large fan of what appears to be some sort of organic wire."
 	icon_state = "growth_node"
 	health = 50
-	death_message = "severs at the base and splatters on the ground."
 
 /datum/chorus_building/muscular_coat
 	desc = "Every beast needs an outside."
@@ -92,20 +88,19 @@
 	click_cooldown = 3 SECONDS
 	health = 200
 	icon_state = "growth_maw_closed"
-	death_message = "sinks into the ground."
 
 /obj/structure/chorus/maw/activate()
 	if(density)
-		density = FALSE
+		density = 0
 		icon_state = "growth_maw_opened"
 		flick("growth_maw_open", src)
 	else
-		density = TRUE
+		density = 1
 		icon_state = "growth_maw_closed"
 		flick("growth_maw_close", src)
 
 /datum/chorus_building/set_to_turf/growth/spinal_column
-	desc = "For growths that must grow up and out. Each use extends another spinal column in either vertical direction."
+	desc = "For growths that must grow up and out."
 	building_type_to_build = /obj/structure/chorus/zleveler/spinal_column
 	build_time = 120
 	build_level = 2
@@ -123,9 +118,6 @@
 	activation_cost_amount = 50
 	density = TRUE
 	turf_type_to_add = /turf/simulated/floor/scales
-	growth_verb = "bursts"
-	death_message = "fractures loudly in half, its two ends dangling apart."
-	death_sound = "fracture"
 
 /datum/chorus_building/set_to_turf/growth/bone_shooter
 	desc = "Automatically shoots bone fragments at enemies."

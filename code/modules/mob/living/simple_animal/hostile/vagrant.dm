@@ -19,8 +19,11 @@
 	break_stuff_probability = 0
 	faction = "vagrant"
 	harm_intent_damage = 3
-	natural_weapon = /obj/item/natural_weapon/bite/weak
+	melee_damage_lower = 3
+	melee_damage_upper = 4
 	light_color = "#8a0707"
+	attacktext = "mauled"
+	attack_sound = 'sound/weapons/bite.ogg'
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0

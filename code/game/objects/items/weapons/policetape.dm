@@ -38,7 +38,7 @@ var/list/tape_roll_applications = list()
 	icon_state = "tape"
 	layer = BASE_ABOVE_OBJ_LAYER
 	randpixel = 0
-	anchored = TRUE
+	anchored = 1
 	var/lifted = 0
 	var/crumpled = 0
 	var/tape_dir = 0
@@ -229,7 +229,7 @@ var/list/tape_roll_applications = list()
 
 		var/can_place = 1
 		while (can_place)
-			if(cur.density)
+			if(cur.density == 1)
 				can_place = 0
 			else if (istype(cur, /turf/space))
 				can_place = 0
@@ -332,7 +332,7 @@ var/list/tape_roll_applications = list()
 			crumple()
 	return ..(mover)
 
-/obj/item/tape/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/tape/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	breaktape(user)
 
 /obj/item/tape/attack_hand(mob/user as mob)

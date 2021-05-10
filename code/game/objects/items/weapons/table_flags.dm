@@ -1,4 +1,4 @@
-/obj/item/tableflag
+/obj/item/weapon/tableflag
 	name = "table flag"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "tableflag"

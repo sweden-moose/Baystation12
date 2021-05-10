@@ -11,7 +11,7 @@ var/const/NETWORK_HANGAR      = "Hangar"
 var/const/NETWORK_EXPLO       = "Exploration"
 var/const/NETWORK_THIRD_DECK  = "Third Deck"
 var/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
-var/const/NETWORK_PETROV  = "Petrov"
+var/const/NETWORK_NANOTRASEN  = "Petrov"
 
 /datum/map/torch/get_network_access(var/network)
 	switch(network)
@@ -29,8 +29,8 @@ var/const/NETWORK_PETROV  = "Petrov"
 			return access_hangar
 		if(NETWORK_EXPLO)
 			return access_explorer
-		if(NETWORK_PETROV)
-			return access_petrov
+		if(NETWORK_NANOTRASEN)
+			return access_petrov_security
 	return get_shared_network_access(network) || ..()
 
 /datum/map/torch
@@ -56,7 +56,7 @@ var/const/NETWORK_PETROV  = "Petrov"
 		NETWORK_AQUILA,
 		NETWORK_CALYPSO,
 		NETWORK_POD,
-		NETWORK_PETROV,
+		NETWORK_NANOTRASEN,
 		NETWORK_ALARM_ATMOS,
 		NETWORK_ALARM_CAMERA,
 		NETWORK_ALARM_FIRE,
@@ -121,8 +121,8 @@ var/const/NETWORK_PETROV  = "Petrov"
 /obj/machinery/camera/network/engineering_outpost
 	network = list(NETWORK_ENGINEERING_OUTPOST)
 
-/obj/machinery/camera/network/petrov
-	network = list(NETWORK_PETROV)
+/obj/machinery/camera/network/nanotrasen
+	network = list(NETWORK_NANOTRASEN)
 
 // Motion
 /obj/machinery/camera/motion/engineering_outpost
@@ -139,13 +139,13 @@ var/const/NETWORK_PETROV  = "Petrov"
 
 // Substation SMES
 /obj/machinery/power/smes/buildable/preset/torch/substation
-	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil = 1) // Note that it gets one more from construction
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1) // Note that it gets one more from construction
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 
 // Substation SMES (charged and with full I/O setting)
 /obj/machinery/power/smes/buildable/preset/torch/substation_full
-	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil = 1)
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -155,8 +155,8 @@ var/const/NETWORK_PETROV  = "Petrov"
 // Main Engine output SMES
 /obj/machinery/power/smes/buildable/preset/torch/engine_main
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/smes_coil/super_io = 2,
-		/obj/item/stock_parts/smes_coil/super_capacity = 2)
+		/obj/item/weapon/stock_parts/smes_coil/super_io = 2,
+		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 2)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -166,8 +166,8 @@ var/const/NETWORK_PETROV  = "Petrov"
 // Shuttle SMES
 /obj/machinery/power/smes/buildable/preset/torch/shuttle
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/smes_coil/super_io = 1,
-		/obj/item/stock_parts/smes_coil/super_capacity = 1)
+		/obj/item/weapon/stock_parts/smes_coil/super_io = 1,
+		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -177,7 +177,7 @@ var/const/NETWORK_PETROV  = "Petrov"
 // Hangar SMES. Charges the shuttles so needs a pretty big throughput.
 /obj/machinery/power/smes/buildable/preset/torch/hangar
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/smes_coil/super_io = 2)
+		/obj/item/weapon/stock_parts/smes_coil/super_io = 2)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE

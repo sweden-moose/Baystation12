@@ -6,8 +6,8 @@
 	name = "foam"
 	icon_state = "foam"
 	opacity = 0
-	anchored = TRUE
-	density = FALSE
+	anchored = 1
+	density = 0
 	layer = ABOVE_OBJ_LAYER
 	mouse_opacity = 0
 	animate_movement = 0
@@ -124,9 +124,9 @@
 /obj/structure/foamedmetal
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "metalfoam"
-	density = TRUE
+	density = 1
 	opacity = 1 // changed in New()
-	anchored = TRUE
+	anchored = 1
 	name = "foamed metal"
 	desc = "A lightweight foamed metal wall."
 	var/metal = 1 // 1 = aluminium, 2 = iron

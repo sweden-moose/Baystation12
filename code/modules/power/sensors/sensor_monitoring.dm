@@ -10,12 +10,10 @@
 	icon_keyboard = "power_key"
 	icon_screen = "power"
 	light_color = "#ffcc33"
-	machine_name = "power monitoring console"
-	machine_desc = "Allows for a detailed and thorough readout of the area's power generation and consumption, listed by area."
 
 	//computer stuff
-	density = TRUE
-	anchored = TRUE
+	density = 1
+	anchored = 1.0
 	var/alerting = 0
 	idle_power_usage = 300
 	active_power_usage = 300

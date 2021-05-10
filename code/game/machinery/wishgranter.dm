@@ -7,8 +7,8 @@
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
 	interact_offline = TRUE
-	anchored = TRUE
-	density = TRUE
+	anchored = 1
+	density = 1
 
 	var/charges = 1
 	var/insisting = 0

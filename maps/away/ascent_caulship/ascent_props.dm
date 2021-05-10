@@ -34,7 +34,7 @@
 	icon_state = "larva"
 	icon_living = "larva"
 	icon_dead = "larva_dead"
-	holder_type = /obj/item/holder
+	holder_type = /obj/item/weapon/holder
 	destroy_surroundings = FALSE
 	health = 10
 	maxHealth = 10
@@ -45,7 +45,9 @@
 	mob_size = MOB_MINISCULE
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
-	natural_weapon = /obj/item/natural_weapon/bite
+	melee_damage_lower = 2
+	melee_damage_upper = 5
+	melee_damage_flags = DAM_SHARP
 	faction = "kharmaani"
 	var/global/list/friendly_species = list(SPECIES_MANTID_ALATE, SPECIES_MANTID_GYNE, SPECIES_MONARCH_QUEEN, SPECIES_MONARCH_WORKER)
 

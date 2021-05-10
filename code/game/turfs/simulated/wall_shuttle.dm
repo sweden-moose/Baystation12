@@ -8,7 +8,7 @@
 	name = "wall"
 	icon_state = "wall1"
 	opacity = 1
-	density = TRUE
+	density = 1
 	blocks_air = 1
 
 /turf/simulated/shuttle/wall/corner

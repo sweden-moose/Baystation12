@@ -10,13 +10,6 @@
 	lightlevel = -0.15
 	surface_color = "#3e3960"
 	water_color = "#2b2840"
-	has_trees = TRUE
-	flora_diversity = 4
-	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/royalcrab,
-					   /mob/living/simple_animal/hostile/retaliate/jelly/alt,
-					   /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt,
-					   /mob/living/simple_animal/hostile/leech)
-
 
 /obj/effect/overmap/visitable/sector/exoplanet/shrouded/generate_atmosphere()
 	..()
@@ -33,16 +26,16 @@
 	flora_prob = 5
 	large_flora_prob = 20
 	megafauna_spawn_prob = 2 //Remember to change this if more types are added.
+	flora_diversity = 3
 	water_level_max = 3
 	water_level_min = 2
 	land_type = /turf/simulated/floor/exoplanet/shrouded
 	water_type = /turf/simulated/floor/exoplanet/water/shallow/tar
-
-/datum/random_map/noise/exoplanet/shrouded/get_additional_spawns(value, turf/T)
-	..()
-
-	if(prob(0.1))
-		new/obj/structure/leech_spawner(T)
+	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/royalcrab,
+					   /mob/living/simple_animal/hostile/retaliate/jelly/alt,
+					   /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt,
+					   /mob/living/simple_animal/hostile/leech)
+	megafauna_types = list(/obj/structure/leech_spawner)
 
 /area/exoplanet/shrouded
 	forced_ambience = list("sound/ambience/spookyspace1.ogg", "sound/ambience/spookyspace2.ogg")
@@ -57,7 +50,7 @@
 	reagent_type = /datum/reagent/toxin/tar
 	dirt_color = "#3e3960"
 
-/turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound(mob/caller)
+/turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound(var/mob/caller)
 	return get_footstep(/decl/footsteps/water, caller)
 
 

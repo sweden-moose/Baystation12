@@ -4,9 +4,9 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "portal"
 	blend_mode = BLEND_SUBTRACT
-	density = TRUE
+	density = 1
 	unacidable = TRUE
-	anchored = TRUE
+	anchored = 1
 	var/boom_time = 1
 
 /obj/effect/force_portal/Initialize()

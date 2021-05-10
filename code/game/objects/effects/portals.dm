@@ -3,11 +3,11 @@
 	desc = "Looks unstable. Best to test it with the clown."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "portal"
-	density = TRUE
+	density = 1
 	unacidable = TRUE
 	var/obj/item/target = null
 	var/creator = null
-	anchored = TRUE
+	anchored = 1.0
 	var/dangerous = 0
 	var/failchance = 0
 

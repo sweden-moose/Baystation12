@@ -24,11 +24,11 @@
 /turf/simulated/floor/airless,
 /area/djstation)
 "an" = (
-/obj/machinery/tele_projector,
+/obj/machinery/teleport/station,
 /turf/simulated/floor/airless,
 /area/djstation)
 "ao" = (
-/obj/machinery/tele_pad,
+/obj/machinery/teleport/hub,
 /turf/simulated/floor/airless,
 /area/djstation)
 "ap" = (

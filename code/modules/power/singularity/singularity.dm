@@ -5,8 +5,8 @@
 	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
-	anchored = TRUE
-	density = TRUE
+	anchored = 1
+	density = 1
 	layer = SINGULARITY_LAYER
 	light_outer_range = 6
 	unacidable = TRUE
@@ -35,7 +35,8 @@
 	energy = starting_energy
 
 	if (temp)
-		addtimer(CALLBACK(null, /proc/qdel, src), temp)
+		spawn (temp)
+			qdel(src)
 
 	..()
 	START_PROCESSING(SSobj, src)

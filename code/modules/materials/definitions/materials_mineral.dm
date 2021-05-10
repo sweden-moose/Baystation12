@@ -270,5 +270,6 @@
 		var/phoronToDeduce = (temperature/30) * effect_multiplier
 		totalPhoron += phoronToDeduce
 		target_tile.assume_gas(GAS_PHORON, phoronToDeduce, 200+T0C)
-		addtimer(CALLBACK(target_tile, /turf/proc/hotspot_expose, temperature, 400), 0)
+		spawn (0)
+			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)

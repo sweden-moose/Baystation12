@@ -2,8 +2,8 @@
 	name = "Robotic Fabricator"
 	icon = 'icons/obj/robotics.dmi'
 	icon_state = "fab-idle"
-	density = TRUE
-	anchored = TRUE
+	density = 1
+	anchored = 1
 	var/metal_amount = 0
 	var/operating = 0
 	var/obj/item/robot_parts/being_built = null
@@ -122,17 +122,16 @@ Please wait until completion...</TT><BR>
 
 					src.overlays += "fab-active"
 					src.updateUsrDialog()
-					addtimer(CALLBACK(src, .proc/done_building), build_time)
+
+					spawn (build_time)
+						if (!isnull(src.being_built))
+							src.being_built.dropInto(loc)
+							src.being_built = null
+						src.update_use_power(POWER_USE_IDLE)
+						src.operating = 0
+						src.overlays -= "fab-active"
 		return
 
 	for (var/mob/M in viewers(1, src))
 		if (M.client && M.machine == src)
 			src.attack_hand(M)
-
-/obj/machinery/robotic_fabricator/proc/done_building()
-	if (!isnull(being_built))
-		being_built.dropInto(get_turf(src))
-		being_built = null
-	update_use_power(POWER_USE_IDLE)
-	overlays -= "fab-active"
-	operating = FALSE

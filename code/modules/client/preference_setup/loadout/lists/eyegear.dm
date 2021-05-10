@@ -32,13 +32,9 @@
 	display_name = "Science Goggles, prescription"
 	path = /obj/item/clothing/glasses/science/prescription
 
-/datum/gear/eyes/sciencehud
+/datum/gear/eyes/sciencegoggles/hud
 	display_name = "Science HUD"
 	path = /obj/item/clothing/glasses/hud/science
-
-/datum/gear/eyes/sciencehud/prescription
-	display_name = "Science HUD, prescription"
-	path = /obj/item/clothing/glasses/hud/science/prescription
 
 /datum/gear/eyes/security
 	display_name = "Security HUD"

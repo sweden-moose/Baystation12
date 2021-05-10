@@ -94,8 +94,8 @@
 	desc = "The HT-451, a torque rotation-based, waste disposal unit for small matter. This one seems remarkably clean."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "toilet00"
-	density = FALSE
-	anchored = TRUE
+	density = 0
+	anchored = 1
 	var/open = 0			//if the lid is up
 	var/cistern = 0			//if the cistern bit is open
 	var/w_items = 0			//the combined w_class of all the items in the cistern
@@ -181,8 +181,8 @@
 	desc = "The HU-452, an experimental urinal."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "urinal"
-	density = FALSE
-	anchored = TRUE
+	density = 0
+	anchored = 1
 
 /obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/grab))
@@ -201,8 +201,8 @@
 	desc = "The HS-451. Installed in the 2200s by the Hygiene Division."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "shower"
-	density = FALSE
-	anchored = TRUE
+	density = 0
+	anchored = 1
 	clogged = -1
 	can_drain = 1
 	drainage = 0.2 			//showers are tiny, drain a little slower
@@ -225,7 +225,7 @@
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mist"
 	layer = MOB_LAYER + 1
-	anchored = TRUE
+	anchored = 1
 	mouse_opacity = 0
 
 /obj/structure/hygiene/shower/attack_hand(var/mob/M)
@@ -330,7 +330,7 @@
 		else if(water_temperature <= H.species.cold_level_1)
 			to_chat(H, "<span class='warning'>The water is freezing cold!</span>")
 
-/obj/item/bikehorn/rubberducky
+/obj/item/weapon/bikehorn/rubberducky
 	name = "rubber ducky"
 	desc = "Rubber ducky you're so fine, you make bathtime lots of fuuun. Rubber ducky I'm awfully fooooond of yooooouuuu~"	//thanks doohl
 	icon = 'icons/obj/watercloset.dmi'
@@ -342,7 +342,7 @@
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "sink"
 	desc = "A sink used for washing one's hands and face."
-	anchored = TRUE
+	anchored = 1
 	var/busy = 0 	//Something's being washed at the moment
 
 /obj/structure/hygiene/sink/MouseDrop_T(var/obj/item/thing, var/mob/user)
@@ -403,15 +403,15 @@
 		to_chat(user, "<span class='warning'>Someone's already washing here.</span>")
 		return
 
-	var/obj/item/reagent_containers/RG = O
+	var/obj/item/weapon/reagent_containers/RG = O
 	if (istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(/datum/reagent/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message("<span class='notice'>[user] fills \the [RG] using \the [src].</span>","<span class='notice'>You fill \the [RG] using \the [src].</span>")
 		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
 		return 1
 
-	else if (istype(O, /obj/item/melee/baton))
-		var/obj/item/melee/baton/B = O
+	else if (istype(O, /obj/item/weapon/melee/baton))
+		var/obj/item/weapon/melee/baton/B = O
 		if(B.bcell)
 			if(B.bcell.charge > 0 && B.status == 1)
 				flick("baton_active", src)
@@ -427,7 +427,7 @@
 					"<span class='danger'>[user] was stunned by \his wet [O]!</span>", \
 					"<span class='userdanger'>[user] was stunned by \his wet [O]!</span>")
 				return 1
-	else if(istype(O, /obj/item/mop))
+	else if(istype(O, /obj/item/weapon/mop))
 		O.reagents.add_reagent(/datum/reagent/water, 5)
 		to_chat(user, "<span class='notice'>You wet \the [O] in \the [src].</span>")
 		playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
@@ -448,7 +448,7 @@
 		return TRUE
 	busy = 0
 
-	if(istype(O, /obj/item/extinguisher/)) return TRUE // We're washing, not filling.
+	if(istype(O, /obj/item/weapon/extinguisher/)) return TRUE // We're washing, not filling.
 
 	O.clean_blood()
 	user.visible_message( \
@@ -488,6 +488,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] is already clogged."))
 		return
 	if (!do_after(user, 3 SECONDS, src))
+		to_chat(user, SPAN_WARNING("You must stay still to clog \the [src]."))
 		return
 	if (clogged || QDELETED(I) || !user.unEquip(I))
 		return
@@ -521,14 +522,14 @@
 		return
 	if(sheets > 0)
 		visible_message("\The [usr] tears a sheet from \the [src].", "You tear a sheet from \the [src].")
-		var/obj/item/paper/crumpled/bog/C =  new(loc)
+		var/obj/item/weapon/paper/crumpled/bog/C =  new(loc)
 		usr.put_in_hands(C)
 		sheets--
 	if (sheets < 1)
 		to_chat(usr, "\The [src] is depleted.")
 		qdel(src)
 
-/obj/item/paper/crumpled/bog
+/obj/item/weapon/paper/crumpled/bog
 	name = "sheet of toilet paper"
 	desc = "A single sheet of toilet paper. Two ply."
 	icon = 'icons/obj/watercloset.dmi'
@@ -539,7 +540,7 @@
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "faucet"
 	desc = "An outlet for liquids. Water you waiting for?"
-	anchored = TRUE
+	anchored = 1
 	drainage = 0
 	clogged = -1
 	var/fill_level = 500
@@ -552,7 +553,7 @@
 		playsound(src.loc, 'sound/effects/closet_open.ogg', 20, 1)
 	else
 		playsound(src.loc, 'sound/effects/closet_close.ogg', 20, 1)
-
+	
 	user.visible_message(SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] the faucet."))
 	update_icon()
 
@@ -578,7 +579,7 @@
 
 /obj/structure/hygiene/faucet/Process()
 	..()
-	if(open)
+	if(open) 
 		water_flow()
 
 /obj/structure/hygiene/faucet/examine(mob/user)

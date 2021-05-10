@@ -145,5 +145,5 @@
 	name = "ir beam"
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "ibeam"
-	anchored = TRUE
-	simulated = FALSE
+	anchored = 1
+	simulated = 0

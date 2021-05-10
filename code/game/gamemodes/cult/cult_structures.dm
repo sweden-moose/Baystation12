@@ -1,6 +1,6 @@
 /obj/structure/cult
-	density = TRUE
-	anchored = TRUE
+	density = 1
+	anchored = 1
 	icon = 'icons/obj/cult.dmi'
 
 /obj/structure/cult/talisman
@@ -15,54 +15,60 @@
 	icon_state = "forge"
 
 /obj/structure/cult/pylon
-	name = "pylon"
+	name = "Pylon"
 	desc = "A floating crystal that hums with an unearthly energy."
 	icon = 'icons/obj/pylon.dmi'
 	icon_state = "pylon"
+	var/isbroken = 0
 	light_max_bright = 0.5
 	light_inner_range = 1
 	light_outer_range = 13
 	light_color = "#3e0000"
-	var/health = 20
-	var/maxhealth = 20
+	var/obj/item/wepon = null
 
-/obj/structure/cult/pylon/attackby(obj/item/W, mob/user)
+/obj/structure/cult/pylon/attack_hand(mob/M as mob)
+	attackpylon(M, 5)
+
+/obj/structure/cult/pylon/attack_generic(var/mob/user, var/damage)
+	attackpylon(user, damage)
+
+/obj/structure/cult/pylon/attackby(obj/item/W as obj, mob/user as mob)
+	attackpylon(user, W.force)
+
+/obj/structure/cult/pylon/proc/attackpylon(mob/user as mob, var/damage)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if (istype(W, /obj/item/natural_weapon/cult_builder))
-		if (health >= maxhealth)
-			to_chat(user, SPAN_WARNING("\The [src] is fully repaired."))
-		else
+	if(!isbroken)
+		if(prob(1+ damage * 5))
 			user.visible_message(
-				SPAN_NOTICE("\The [user] mends some of the cracks on \the [src]."),
-				SPAN_NOTICE("You repair some of \the [src]'s damage.")
-			)
-			health = min(maxhealth, health + 5)
-		return
-	user.do_attack_animation(src)
-	if (W.force < 4)
-		user.visible_message(
-			SPAN_DANGER("\The [user] hits \the [src], but they bounce off!"),
-			SPAN_DANGER("You hit \the [src], but bounce off!"),
-			SPAN_WARNING("You hear thick glass being struck with something.")
-		)
-		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 50, TRUE)
-		return
-	health = max(0, health - W.force)
-	if(!health)
-		user.visible_message(
-			SPAN_DANGER("\The [user] smashes \the [src]!"),
-			SPAN_DANGER("You smash \the [src] into pieces!"),
-			SPAN_WARNING("You hear glass shattering, and a tinkle of shards.")
-		)
-		playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, TRUE)
-		qdel(src)
+				"<span class='danger'>[user] smashed the pylon!</span>",
+				"<span class='warning'>You hit the pylon, and its crystal breaks apart!</span>",
+				"You hear a tinkle of crystal shards"
+				)
+			user.do_attack_animation(src)
+			playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, 1)
+			isbroken = 1
+			set_density(0)
+			icon_state = "pylon-broken"
+			set_light(0)
+		else
+			to_chat(user, "You hit the pylon!")
+			playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, 1)
 	else
-		user.visible_message(
-			SPAN_DANGER("\The [user] hits \the [src]!"),
-			SPAN_DANGER("You hit \the [src]!"),
-			SPAN_WARNING("You hear thick glass being struck with something.")
-		)
-		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, TRUE)
+		if(prob(damage * 2))
+			to_chat(user, "You pulverize what was left of the pylon!")
+			qdel(src)
+		else
+			to_chat(user, "You hit the pylon!")
+		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, 1)
+
+
+/obj/structure/cult/pylon/proc/repair(mob/user as mob)
+	if(isbroken)
+		to_chat(user, "You repair the pylon.")
+		isbroken = 0
+		set_density(1)
+		icon_state = "pylon"
+		set_light(0.5)
 
 /obj/structure/cult/tome
 	name = "Desk"
@@ -84,9 +90,9 @@
 	desc = "You're pretty sure that abyss is staring back."
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "hole"
-	density = TRUE
+	density = 1
 	unacidable = TRUE
-	anchored = TRUE
+	anchored = 1.0
 	var/spawnable = null
 
 /obj/effect/gateway/active
@@ -144,7 +150,7 @@
 		else
 			for(var/obj/item/W in M)
 				M.drop_from_inventory(W)
-				if(istype(W, /obj/item/implant))
+				if(istype(W, /obj/item/weapon/implant))
 					qdel(W)
 
 		var/mob/living/new_mob = new /mob/living/simple_animal/corgi(A.loc)

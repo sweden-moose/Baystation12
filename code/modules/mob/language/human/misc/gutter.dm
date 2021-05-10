@@ -19,4 +19,3 @@
 		"yayo", "aiya", "chiksa", "tikat", "bazar","oi", "yo", "meit", "grok", "ken", "berk", "cohon", "pendeo"
 	)
 	shorthand = "GT"
-	has_written_form = TRUE

@@ -5,8 +5,6 @@
 	icon_keyboard = "power_key"
 	icon_screen = "power"
 	req_access = list(access_engine_equip)
-	machine_name = "drone control console"
-	machine_desc = "Used to monitor the status of the ship's maintenance drones. Also allows for simple pings to draw attention to areas in need of repairs."
 
 	//Used when pinging drones.
 	var/drone_call_area = "Engineering"
@@ -47,7 +45,7 @@
 		to_chat(usr, "<span class='danger'>Access denied.</span>")
 		return
 
-	if ((list_find(usr.contents, src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 
 	if (href_list["setarea"])

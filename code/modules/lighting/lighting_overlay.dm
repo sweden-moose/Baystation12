@@ -2,8 +2,8 @@
 /atom/movable/lighting_overlay
 	name = ""
 	mouse_opacity = 0
-	simulated = FALSE
-	anchored = TRUE
+	simulated = 0
+	anchored = 1
 	icon = LIGHTING_ICON
 	plane = LIGHTING_PLANE
 	layer = LIGHTING_LAYER

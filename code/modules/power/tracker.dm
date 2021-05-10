@@ -8,8 +8,8 @@
 	desc = "A solar directional tracker."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "tracker"
-	anchored = TRUE
-	density = TRUE
+	anchored = 1
+	density = 1
 
 	var/id = 0
 	var/sun_angle = 0		// sun angle as set by sun datum
@@ -42,7 +42,7 @@
 		S = new /obj/item/solar_assembly(src)
 		S.glass_type = /obj/item/stack/material/glass
 		S.tracker = 1
-		S.anchored = TRUE
+		S.anchored = 1
 	S.forceMove(src)
 	update_icon()
 
@@ -56,7 +56,7 @@
 	if(powernet && (powernet == control.powernet)) //update if we're still in the same powernet
 		control.cdir = angle
 
-/obj/machinery/power/tracker/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/power/tracker/attackby(var/obj/item/weapon/W, var/mob/user)
 
 	if(isCrowbar(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
@@ -74,7 +74,7 @@
 
 // Tracker Electronic
 
-/obj/item/tracker_electronics
+/obj/item/weapon/tracker_electronics
 
 	name = "tracker electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'

@@ -6,7 +6,8 @@
 	var/turf/T = GetBelow(src)
 	while (T && (T.z_flags & ZM_MIMIC_BELOW))
 		T = GetBelow(T)
-	return isspaceturf(T)
+
+	return istype(T, /turf/space)
 
 /turf/update_icon()
 	..()

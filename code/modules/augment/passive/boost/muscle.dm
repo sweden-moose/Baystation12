@@ -23,19 +23,13 @@
 	else if(organ_tag == BP_AUGMENT_R_LEG)
 		other = owner.internal_organs_by_name[BP_AUGMENT_L_LEG]
 	if(other && istype(other))
-		var/succesful = TRUE
-		if(owner.get_skill_value(SKILL_HAULING) < SKILL_PROF)
-			succesful = FALSE
-			var/datum/skill_buff/augment/muscle/A
-			A = owner.buff_skill(buffs, 0, buffpath)
-			if(A && istype(A))
-				succesful = TRUE
-				A.id = id
-
-		if(succesful)
+		var/datum/skill_buff/augment/muscle/A
+		A = owner.buff_skill(buffs, 0, buffpath)
+		if(A && istype(A))
+			active = 1
+			other.active = 1
 			other.other = src
-			other.active = TRUE
-			active = TRUE
+			A.id = id
 
 /obj/item/organ/internal/augment/boost/muscle/onRemove()
 	if(!active)
@@ -44,13 +38,11 @@
 	for(var/datum/skill_buff/augment/muscle/D in B)
 		if(D.id == id)
 			D.remove()
-			break
-
-	if(other)
-		other.active = FALSE
-		other.other = null
-		other = null
-	active = FALSE
+			if(other)
+				other.active = 0
+				other.other = null
+				other = null
+			return
 
 /obj/item/organ/internal/augment/boost/muscle/Destroy()
 	. = ..()

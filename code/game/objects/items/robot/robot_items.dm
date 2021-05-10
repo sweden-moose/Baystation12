@@ -14,7 +14,7 @@
 /obj/item/borg/sight
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "securearea"
-	var/sight_mode = 0
+	var/sight_mode = null
 	var/hud_type
 
 

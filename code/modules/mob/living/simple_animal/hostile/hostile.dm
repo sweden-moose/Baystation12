@@ -5,6 +5,7 @@
 	var/attack_same = 0
 	var/ranged = 0
 	var/rapid = 0
+	var/melee_damage_flags //sharp, edge, etc
 	var/sa_accuracy = 85 //base chance to hit out of 100
 	var/projectiletype
 	var/projectilesound
@@ -27,7 +28,7 @@
 	var/pry_time = 7 SECONDS //time it takes for mob to pry open a door
 	var/pry_desc = "prying" //"X begins pry_desc the door!"
 
-	//hostile mobs will bash through these in order with their natural weapon
+	//hostile mobs will bash through these in order - any new entry must have a functioning attack_generic()
 	var/list/valid_obstacles_by_priority = list(/obj/structure/window,
 												/obj/structure/closet,
 												/obj/machinery/door/window,
@@ -61,15 +62,10 @@
 /mob/living/simple_animal/hostile/proc/ValidTarget(var/mob/M)
 	if(M == src)
 		return FALSE
-
-	if (M.status_flags & NOTARGET)
-		return FALSE
-
 	if(istype(M, /mob/living/simple_animal/hostile))
 		var/mob/living/simple_animal/hostile/H = M
 		if(H.faction == faction && !attack_same && !H.attack_same)
 			return FALSE
-
 	if(istype(M))
 		if(M.faction == faction)
 			return FALSE
@@ -81,7 +77,6 @@
 			var/mob/living/carbon/human/H = M
 			if(H.is_cloaked())
 				return FALSE
-
 	return TRUE
 
 /mob/living/simple_animal/hostile/proc/MoveToTarget()
@@ -132,7 +127,7 @@
 			visible_message("<span class='notice'>\The [src] misses its attack on \the [target_mob]!</span>")
 			return
 		var/mob/living/L = target_mob
-		L.attackby(get_natural_weapon(), src)
+		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,environment_smash,damtype,defense,melee_damage_flags)
 		return L
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
@@ -248,7 +243,7 @@
 	playsound(user, projectilesound, 100, 1)
 	if(!A)	return
 	var/def_zone = get_exposed_defense_zone(target)
-	A.launch_from_mob(target, src, def_zone)
+	A.launch(target, def_zone)
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings() //courtesy of Lohikar
 	if(!can_act())
@@ -261,14 +256,14 @@
 
 		var/obj/effect/shield/S = locate(/obj/effect/shield) in targ
 		if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
-			S.attackby(get_natural_weapon(), src)
+			S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 			return
 
 		for(var/type in valid_obstacles_by_priority)
 			var/obj/obstacle = locate(type) in targ
 			if(obstacle)
 				face_atom(obstacle)
-				obstacle.attackby(get_natural_weapon(), src)
+				obstacle.attack_generic(src, rand(melee_damage_lower, melee_damage_upper), attacktext)
 				return
 
 		if(can_pry)

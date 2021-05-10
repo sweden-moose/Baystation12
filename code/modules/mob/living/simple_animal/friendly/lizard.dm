@@ -8,7 +8,9 @@
 	speak_emote = list("hisses")
 	health = 5
 	maxHealth = 5
-	natural_weapon = /obj/item/natural_weapon/bite/weak
+	attacktext = "bitten"
+	melee_damage_lower = 1
+	melee_damage_upper = 2
 	response_help  = "pets"
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
@@ -16,7 +18,7 @@
 	possession_candidate = 1
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
-	density = FALSE
+	density = 0
 
 	meat_amount = 1
 	bone_amount = 1

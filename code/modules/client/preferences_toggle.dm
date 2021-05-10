@@ -38,7 +38,7 @@ var/list/client_preference_stats_
 
 /stat_client_preference
 	parent_type = /atom/movable
-	simulated = FALSE
+	simulated = 0
 	var/datum/client_preference/client_preference
 
 /stat_client_preference/New(var/loc, var/preference)

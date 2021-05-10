@@ -15,7 +15,7 @@
 	id = "awaysite_mininghome"
 	description = "A chill asteroid mining station."
 	suffixes = list("mininghome/mininghome.dmm")
-	spawn_cost = 0.5
+	cost = 0.5
 
 /obj/effect/shuttle_landmark/nav_mininghome_1
 	name = "Navpoint #1"

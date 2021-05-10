@@ -190,7 +190,7 @@
 	icon_state = "tiny"
 	icon_keyboard = "tiny_keyboard"
 	icon_screen = "lift"
-	density = FALSE
+	density = 0
 
 /datum/shuttle/autodock/ferry/gantry
 	name = "Gantry Lift"

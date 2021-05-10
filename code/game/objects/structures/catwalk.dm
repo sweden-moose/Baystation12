@@ -3,8 +3,8 @@
 	desc = "Cats really don't like these things."
 	icon = 'icons/obj/catwalks.dmi'
 	icon_state = "catwalk"
-	density = FALSE
-	anchored = TRUE
+	density = 0
+	anchored = 1.0
 	layer = CATWALK_LAYER
 	footstep_type = /decl/footsteps/catwalk
 	obj_flags = OBJ_FLAG_NOFALL
@@ -76,12 +76,12 @@
 
 /obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
 	if(isWelder(C))
-		var/obj/item/weldingtool/WT = C
+		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
 			deconstruct(user)
 		return
-	if(istype(C, /obj/item/gun/energy/plasmacutter))
-		var/obj/item/gun/energy/plasmacutter/cutter = C
+	if(istype(C, /obj/item/weapon/gun/energy/plasmacutter))
+		var/obj/item/weapon/gun/energy/plasmacutter/cutter = C
 		if(!cutter.slice(user))
 			return
 		deconstruct(user)
@@ -128,8 +128,8 @@
 	name = "plated catwalk spawner"
 	icon = 'icons/obj/catwalks.dmi'
 	icon_state = "catwalk_plated"
-	density = TRUE
-	anchored = TRUE
+	density = 1
+	anchored = 1.0
 	var/activated = FALSE
 	layer = CATWALK_LAYER
 	var/plating_type = /decl/flooring/tiling/mono

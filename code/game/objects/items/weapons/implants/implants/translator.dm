@@ -1,5 +1,5 @@
 //Implant that lets you learn languages by hearing them
-/obj/item/implant/translator
+/obj/item/weapon/implant/translator
 	name = "babel implant"
 	desc = "A small implant with a microphone on it."
 	icon_state = "implant_evil"
@@ -9,14 +9,14 @@
 	var/learning_threshold = 20 //need to hear language spoken this many times to learn it
 	var/max_languages = 5
 
-/obj/item/implant/translator/get_data()
+/obj/item/weapon/implant/translator/get_data()
 	return "WARNING: No match found in the database."
 
-/obj/item/implant/translator/Initialize()
+/obj/item/weapon/implant/translator/Initialize()
 	. = ..()
 	GLOB.listening_objects += src
 
-/obj/item/implant/translator/hear_talk(mob/M, msg, verb, datum/language/speaking)
+/obj/item/weapon/implant/translator/hear_talk(mob/M, msg, verb, datum/language/speaking)
 	if(!speaking)
 		return
 	if(!imp_in)
@@ -30,19 +30,19 @@
 		to_chat(imp_in, SPAN_NOTICE("You feel like you can understand [speaking.name] now..."))
 		imp_in.add_language(speaking.name)
 
-/obj/item/implant/translator/implanted(mob/target)
+/obj/item/weapon/implant/translator/implanted(mob/target)
 	return TRUE
 
-/obj/item/implant/translator/Destroy()
+/obj/item/weapon/implant/translator/Destroy()
 	removed()
 	GLOB.listening_objects -= src
 	return ..()
 
-/obj/item/implanter/translator
+/obj/item/weapon/implanter/translator
 	name = "babel implanter"
-	imp = /obj/item/implant/translator
+	imp = /obj/item/weapon/implant/translator
 
-/obj/item/implant/translator/natural
+/obj/item/weapon/implant/translator/natural
 	name = "lingophagic node"
 	desc = "A chunk of what could be discolored crystalized brain matter. It seems to pulse occasionally."
 	icon_state = "implant_melted"

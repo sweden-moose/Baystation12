@@ -3,7 +3,7 @@
 	id = "exoplanet_hydrobase"
 	description = "hydroponics base with random plants and a lot of enemies"
 	suffixes = list("hydrobase/hydrobase.dmm")
-	spawn_cost = 2
+	cost = 2
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 	ruin_tags = RUIN_ALIEN
 	apc_test_exempt_areas = list(
@@ -87,11 +87,9 @@
 	desc = "An impressive goat, in size and coat. His horns look pretty serious!"
 	health = 100
 	maxHealth = 100
-	natural_weapon = /obj/item/natural_weapon/hooves/strong
+	melee_damage_lower = 10
+	melee_damage_upper = 15
 	faction = "farmbots"
-
-/obj/item/natural_weapon/hooves/strong
-	force = 15
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro
 	name = "Farmbot"

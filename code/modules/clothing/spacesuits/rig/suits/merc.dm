@@ -2,7 +2,7 @@
 	light_overlay = "helmet_light_dual_green"
 	camera = /obj/machinery/camera/network/mercenary
 
-/obj/item/rig/merc
+/obj/item/weapon/rig/merc
 	name = "crimson hardsuit control module"
 	desc = "A blood-red hardsuit module with heavy armour plates."
 	icon_state = "merc_rig"
@@ -22,7 +22,7 @@
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/merc
 	glove_type = /obj/item/clothing/gloves/rig/merc
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/melee/energy/sword,/obj/item/handcuffs)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 
 	initial_modules = list(
 		/obj/item/rig_module/mounted/lcannon,
@@ -32,8 +32,7 @@
 		/obj/item/rig_module/power_sink,
 		/obj/item/rig_module/electrowarfare_suite,
 		/obj/item/rig_module/chem_dispenser/combat,
-		/obj/item/rig_module/fabricator/energy_net,
-		/obj/item/rig_module/cooling_unit
+		/obj/item/rig_module/fabricator/energy_net
 		)
 
 /obj/item/clothing/gloves/rig/merc
@@ -41,14 +40,13 @@
 	siemens_coefficient = 0
 
 //Has most of the modules removed
-/obj/item/rig/merc/empty
+/obj/item/weapon/rig/merc/empty
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/electrowarfare_suite,
-		/obj/item/rig_module/cooling_unit
 		)
 
-/obj/item/rig/merc/heavy
+/obj/item/weapon/rig/merc/heavy
 	name = "crimson EOD hardsuit control module"
 	desc = "A blood-red hardsuit with heavy armoured plates. Judging by the abnormally thick plates, this one is for working with explosives."
 	icon_state = "merc_rig_heavy"
@@ -66,7 +64,7 @@
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	min_pressure_protection = 0
 
-/obj/item/rig/merc/heavy/empty
+/obj/item/weapon/rig/merc/heavy/empty
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/electrowarfare_suite,

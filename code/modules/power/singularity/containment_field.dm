@@ -5,8 +5,8 @@
 	desc = "An energy field."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "Contain_F"
-	anchored = TRUE
-	density = FALSE
+	anchored = 1
+	density = 0
 	unacidable = TRUE
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null

@@ -21,4 +21,3 @@
 		"hin", "deed", "accord", "caveat", "pledge", "rights", "et", "ex", "bono", "quo", "pro", "ad",
 		"ek", "aur", "ki", "ki", "ke", "de", "ki", "ne", "ek", "aar", "ain", "ki", "me", "dei", "dekh"
 	)
-	has_written_form = TRUE

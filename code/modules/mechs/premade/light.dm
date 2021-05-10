@@ -36,17 +36,13 @@
 
 /obj/item/mech_component/propulsion/light
 	name = "light legs"
-	exosuit_desc_string = "flexible electromechanic legs"
+	exosuit_desc_string = "aerodynamic electromechanic legs"
 	icon_state = "light_legs"
 	move_delay = 2
 	turn_delay = 3
 	max_damage = 40
 	power_use = 5
-	desc = "These Odysseus series legs are built from lightweight flexible polymers, making them capable of handling falls from up to 120 meters in 1g environments. Provided that the exosuit lands on its feet."
-	max_fall_damage = 0
-
-/obj/item/mech_component/propulsion/handle_vehicle_fall()
-	visible_message(SPAN_NOTICE("\The [src] creak as they absorb the impact."))
+	desc = "The electrical systems driving these legs are almost totally silent. Unfortunately slamming a plate of metal against the ground is not."
 
 /obj/item/mech_component/sensors/light
 	name = "light sensors"
@@ -74,7 +70,7 @@
 	icon_state = "light_body"
 	max_damage = 50
 	power_use = 5
-	has_hardpoints = list(HARDPOINT_BACK, HARDPOINT_LEFT_SHOULDER)
+	has_hardpoints = list(HARDPOINT_BACK)
 	desc = "The Veymed Odysseus series cockpits combine ultralight materials and clear aluminum laminates to provide an optimized cockpit experience."
 	climb_time = 15
 

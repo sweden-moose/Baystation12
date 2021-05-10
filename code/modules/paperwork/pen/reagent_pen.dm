@@ -1,12 +1,12 @@
-/obj/item/pen/reagent
+/obj/item/weapon/pen/reagent
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ESOTERIC = 5)
 
-/obj/item/pen/reagent/New()
+/obj/item/weapon/pen/reagent/New()
 	..()
 	create_reagents(30)
 
-/obj/item/pen/reagent/attack(mob/living/M, mob/user, var/target_zone)
+/obj/item/weapon/pen/reagent/attack(mob/living/M, mob/user, var/target_zone)
 
 	if(!istype(M))
 		return
@@ -33,10 +33,10 @@
 /*
  * Sleepy Pens
  */
-/obj/item/pen/reagent/sleepy
+/obj/item/weapon/pen/reagent/sleepy
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\"."
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ESOTERIC = 5)
 
-/obj/item/pen/reagent/sleepy/New()
+/obj/item/weapon/pen/reagent/sleepy/New()
 	..()
 	reagents.add_reagent(/datum/reagent/vecuronium_bromide, 15)

@@ -1,4 +1,4 @@
-/obj/item/material/ashtray
+/obj/item/weapon/material/ashtray
 	name = "ashtray"
 	desc = "A thing to keep your butts in."
 	icon = 'icons/obj/objects.dmi'
@@ -9,7 +9,7 @@
 	randpixel = 5
 	var/max_butts = 10
 
-/obj/item/material/ashtray/examine(mob/user)
+/obj/item/weapon/material/ashtray/examine(mob/user)
 	. = ..()
 	if(material)
 		to_chat(user, "It's made of [material.display_name].")
@@ -18,7 +18,7 @@
 	else if(contents.len)
 		to_chat(user, "It has [contents.len] cig butts in it.")
 
-/obj/item/material/ashtray/on_update_icon()
+/obj/item/weapon/material/ashtray/on_update_icon()
 	..()
 	overlays.Cut()
 	if (contents.len == max_butts)
@@ -26,10 +26,10 @@
 	else if (contents.len >= max_butts/2)
 		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
 
-/obj/item/material/ashtray/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weapon/material/ashtray/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (health <= 0)
 		return
-	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/flame/match))
+	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/weapon/flame/match))
 		if (contents.len >= max_butts)
 			to_chat(user, "\The [src] is full.")
 			return
@@ -52,7 +52,7 @@
 		if (health < 1)
 			shatter()
 
-/obj/item/material/ashtray/throw_impact(atom/hit_atom)
+/obj/item/weapon/material/ashtray/throw_impact(atom/hit_atom)
 	if (health > 0)
 		health = max(0,health - 3)
 		if (contents.len)
@@ -66,11 +66,11 @@
 		update_icon()
 	return ..()
 
-/obj/item/material/ashtray/plastic/New(var/newloc)
+/obj/item/weapon/material/ashtray/plastic/New(var/newloc)
 	..(newloc, MATERIAL_PLASTIC)
 
-/obj/item/material/ashtray/bronze/New(var/newloc)
+/obj/item/weapon/material/ashtray/bronze/New(var/newloc)
 	..(newloc, MATERIAL_BRONZE)
 
-/obj/item/material/ashtray/glass/New(var/newloc)
+/obj/item/weapon/material/ashtray/glass/New(var/newloc)
 	..(newloc, MATERIAL_GLASS)
