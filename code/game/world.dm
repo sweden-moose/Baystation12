@@ -134,28 +134,11 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	* The following topic calls are available without a comms secret.
 	* * * * * * * */
 
-	var/input[] = params2list(T)
-	if(input["message"])
-		var/mes_to_replace = splittext(input["message"], "|")
-		input["message"] = ""
-		for(var/pos in mes_to_replace)
-			input["message"] += ascii2text(text2num(pos))
-	var/key_valid = config.comms_password && input["key"] == config.comms_password
-	
-
 	if (T == "ping")
 		var/x = 1
 		for (var/client/C)
 			x++
 		return x
-	
-	if(input["type"] == "who")
-		var/n = ""
-		for(var/mob/M in GLOB.player_list)
-			if(M.client)
-				n+=M.key
-				n+=" "
-		return n
 
 	else if(T == "players")
 		var/n = 0
@@ -165,6 +148,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		return n
 
 	else if (copytext(T,1,7) == "status")
+		var/input[] = params2list(T)
 		var/list/s = list()
 		s["version"] = config.game_version
 		s["mode"] = PUBLIC_GAME_MODE
@@ -178,7 +162,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		s["players"] = 0
 		s["stationtime"] = stationtime2text()
 		s["roundduration"] = roundduration2text()
-		s["map"] = replacetext_char(GLOB.using_map.full_name, "\improper", "") //Done to remove the non-UTF-8 text macros 
+		s["map"] = replacetext(GLOB.using_map.full_name, "\improper", "") //Done to remove the non-UTF-8 text macros 
 
 		var/active = 0
 		var/list/players = list()
@@ -243,6 +227,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	* * * * * * * */
 
 	if(copytext(T,1,14) == "placepermaban")
+		var/input[] = params2list(T)
 		if(!config.ban_comms_password)
 			SET_THROTTLE(10 SECONDS, "Bans Not Enabled")
 			return "Not Enabled"
@@ -267,30 +252,6 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		ban_unban_log_save("[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.")
 		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
 		qdel(C)
-	
-	else if(input["type"]=="ooc")
-		if(!key_valid)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-				world_topic_spam_protect_time = world.time
-				return "Bad Key (Throttled)"
-			world_topic_spam_protect_time = world.time
-			return "Bad Key"
-		var/ckey = input["user"] 
-		var/message = input["message"]
-		if(!ckey||!message)
-			return
-		if(!config.vars["ooc_allowed"]&&!input["isadmin"])
-			return "globally muted"
-		var/sent_message = "[create_text_tag("DISCORD OOC:")] <EM>[ckey]:</EM> <span class='message linkify'>[message]</span>"
-		SSwebhooks.send(WEBHOOK_OOC, list("key" = ckey, "message" = message, type="DOOC"))
-		for(var/client/target in GLOB.clients)
-			if(!target)
-				continue //sanity
-			if(target.is_key_ignored(ckey) || target.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE || target.get_preference_value(/datum/client_preference/show_discord_ooc) == GLOB.PREF_HIDE  && !input["isadmin"]) // If we're ignored by this person, then do nothing.
-				continue //if it shouldn't see then it doesn't
-			to_chat(target, "<span class='ooc'><span class='everyone'>[sent_message]</span></span>")
-		
 
 	/* * * * * * * *
 	* Secure Topic Calls
@@ -302,6 +263,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		return "Not enabled"
 
 	else if(copytext(T,1,5) == "laws")
+		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
@@ -348,6 +310,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			return list2params(ret)
 
 	else if(copytext(T,1,5) == "info")
+		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
@@ -407,6 +370,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		*/
 
 
+		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
@@ -448,12 +412,14 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 				1. notes = ckey of person the notes lookup is for
 				2. validationkey = the key the bot has, it should match the gameservers commspassword in it's configuration.
 		*/
+		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 		return show_player_info_irc(ckey(input["notes"]))
 
 	else if(copytext(T,1,4) == "age")
+		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
@@ -467,6 +433,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			return "Database connection failed or not set up"
 
 	else if(copytext(T,1,19) == "prometheus_metrics")
+		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
@@ -612,7 +579,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	if(game_id)
 		GLOB.log_directory += "[game_id]"
 	else
-		GLOB.log_directory += "[replacetext_char(time_stamp(), ":", ".")]"
+		GLOB.log_directory += "[replacetext(time_stamp(), ":", ".")]"
 
 	GLOB.world_qdel_log = file("[GLOB.log_directory]/qdel.log")
 	to_file(GLOB.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
